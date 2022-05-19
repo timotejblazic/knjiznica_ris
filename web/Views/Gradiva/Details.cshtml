@@ -1,0 +1,95 @@
+@model web.Models.Gradivo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Podrobnosti</h1>
+
+<div>
+    <h4>Gradivo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Naslov)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Naslov)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LetoIzdaje)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LetoIzdaje)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SteviloStrani)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SteviloStrani)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CenaGradivo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CenaGradivo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Avtor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Avtor.Ime)
+            @Html.DisplayFor(model => model.Avtor.Priimek)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kategorija)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kategorija.Naziv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Zanr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Zanr.Naziv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Zalozba)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Zalozba.Naziv)
+        </dd>
+    </dl>
+    <hr />
+    @if (ViewData["OceneFromGradivoID"] != null)
+    {
+        <h3>Ocene</h3>
+        <table class="table">
+            <tr>
+                <th>Uporabnik</th>
+                <th>Ocena</th>
+                <th>Mnenje</th>
+            </tr>
+            @foreach (var item in (IEnumerable<Ocena>)ViewData["OceneFromGradivoID"])
+            {
+                <tr>
+                    <td>@item.UporabnikID</td>
+                    <td>@item.Vrednost</td>
+                    <td>@item.Mnenje</td>
+                </tr>
+            }
+        </table>
+    }
+    @*<a asp-action="Index" asp-route-id="@Model.GradivoID">Dodaj Oceno</a>*@
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.GradivoID">Uredi</a> |
+    <a asp-action="Index">Nazaj na gradiva</a>
+</div>

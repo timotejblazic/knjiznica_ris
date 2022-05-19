@@ -1,0 +1,41 @@
+@model IEnumerable<web.Models.Ocena>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Ocene</h1>
+
+<p>
+    <a asp-action="Create">Ustvari novo oceno</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Vrednost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mnenje)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vrednost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mnenje)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OcenaID">Uredi</a> |
+                <a asp-action="Details" asp-route-id="@item.OcenaID">Podrobnosti</a> |
+                <a asp-action="Delete" asp-route-id="@item.OcenaID">Izbris</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

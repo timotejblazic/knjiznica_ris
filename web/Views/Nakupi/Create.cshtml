@@ -1,0 +1,18 @@
+@model web.Models.Nakup
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Nakup</h1>
+
+<h4>Ste prepričani, da želite izvesti nakup?</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <input type="submit" value="Kupi" class="btn btn-primary" />
+            <a asp-controller="Gradiva" asp-action="Index">Nazaj na seznam</a>
+        </form>
+    </div>
+</div>

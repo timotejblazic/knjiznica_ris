@@ -1,0 +1,27 @@
+@model web.Models.Kategorija
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Izbris</h1>
+
+<h3>Ste prepričani, da želite izbrisati?</h3>
+<div>
+    <h4>Kategorija</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Naziv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Naziv)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="KategorijaID" />
+        <input type="submit" value="Izbris" class="btn btn-danger" /> |
+        <a asp-action="Index">Nazaj na seznam kategorij</a>
+    </form>
+</div>

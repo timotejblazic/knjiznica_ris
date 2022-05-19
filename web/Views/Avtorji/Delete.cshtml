@@ -1,0 +1,39 @@
+@model web.Models.Avtor
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Izbris</h1>
+
+<h3>Ste prepričani, da želite izbrisati?</h3>
+<div>
+    <h4>Avtor</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Priimek)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Priimek)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="AvtorID" />
+        <input type="submit" value="Izbris" class="btn btn-danger" /> |
+        <a asp-action="Index">Nazaj na seznam avtorjev</a>
+    </form>
+</div>

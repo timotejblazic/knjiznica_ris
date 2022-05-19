@@ -1,0 +1,54 @@
+@model web.Models.Izposoja
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Izposoja</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DatumIzposoje)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DatumIzposoje)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DatumVrnitve)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DatumVrnitve)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Uporabnik)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Uporabnik.Id)
+        </dd>
+    </dl>
+    <hr>
+    @if (ViewData["GiID"] != null)
+    {
+        <h3>Izposojena gradiva</h3>
+        <table class="table">
+            <tr>
+                <th>GradivoIzvod ID</th>
+                <th>Naslov</th>
+                <th>Število strani</th>
+            </tr>
+            <tr>
+                <td>@ViewData["GiID"]</td>
+                <td>@ViewData["GNaslov"]</td>
+                <td>@ViewData["GStStrani"]</td>
+            </tr>
+        
+        </table>
+    }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IzposojaID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

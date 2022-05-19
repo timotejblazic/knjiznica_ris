@@ -1,0 +1,179 @@
+@model PaginatedList<web.Models.Gradivo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Gradiva</h1>
+
+<p>
+    <a asp-action="Create">Dodaj Gradivo</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Išči: <input type="text" name="SearchString" value='@ViewData["CurrentFilter"]' />
+            <input type="submit" value="Išči" class="btn btn-default" /> |
+            <a asp-action="Index">Prikaži vse</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder='@ViewData["NaslovSortParm"]' asp-route-currentFilter='@ViewData["CurrentFilter"]'>Naslov</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder='@ViewData["LetoIzdajeSortParm"]' asp-route-currentFilter='@ViewData["CurrentFilter"]'>Leto izdaje</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder='@ViewData["SteviloStraniSortParm"]' asp-route-currentFilter='@ViewData["CurrentFilter"]'>Stevilo strani</a>
+            </th>
+            <th>
+                Opis
+            </th>
+            <th>
+                Cena
+            </th>
+            <th>
+                Kategorija
+            </th>
+            <th>
+                Zanr
+            </th>
+            <th>
+                Zalozba
+            </th>
+            <th>
+                Avtor
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+@foreach (var item in Model) {
+    string selectedRow = "";
+    if (item.GradivoID == (int?)ViewData["GradivoID"])
+    {
+        selectedRow = "table-success";
+    }
+        <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.Naslov)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LetoIzdaje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SteviloStrani)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CenaGradivo)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Kategorija.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zanr.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zalozba.Naziv)
+            </td>
+            <td>
+                <a class="text-decoration-none" asp-controller="Avtorji" asp-action="Details" asp-route-id="@item.Avtor.AvtorID">
+                    @Html.DisplayFor(modelItem => item.Avtor.Ime)
+                    @Html.DisplayFor(modelItem => item.Avtor.Priimek)
+                </a>
+            </td>
+            <td>
+                <a asp-action="Index" asp-route-id="@item.GradivoID">Izberi</a> |                
+                <a asp-action="Edit" asp-route-id="@item.GradivoID">Uredi</a> |
+                <a asp-action="Details" asp-route-id="@item.GradivoID">Podrobnosti</a> |
+                <a asp-controller="Ocene" asp-action="Create" asp-route-idGradivo="@item.GradivoID">Oceni</a> |
+                <a asp-action="Delete" asp-route-id="@item.GradivoID">Izbris</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder='@ViewData["CurrentSort"]'
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter='@ViewData["CurrentFilter"]'
+   class="btn btn-default @prevDisabled">
+    Prejšnja
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder='@ViewData["CurrentSort"]'
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter='@ViewData["CurrentFilter"]'
+   class="btn btn-default @nextDisabled">
+    Naslednja
+</a>
+
+
+
+@if (ViewData["GradivoIzvodiFromGradivoID"] != null)
+{
+    <h3>Izvodi gradiv izbranega gradiva</h3>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th></th>
+            <th></th>
+            <th>Predivdoma na voljo</th>
+        </tr>
+
+        @foreach (var item in (IEnumerable<GradivoIzvod>)ViewData["GradivoIzvodiFromGradivoID"])
+        {
+            @if (item.NakupID == null)
+            {
+                <tr>
+                    <td>
+                        @item.GradivoIzvodID
+                    </td>
+                    <td>
+                        @if (item.IzposojaID == null)
+                        {
+                            <a asp-controller="Izposoje" asp-action="Create" asp-route-idGradivoIzvod="@item.GradivoIzvodID"><button type="button" class="btn btn-success">Izposodi</button></a>
+                        }
+                        else
+                        {
+                            <span class="text-danger">Ni na voljo.</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.IzposojaID == null)
+                        {
+                            <a asp-controller="Nakupi" asp-action="Create" asp-route-idGradivoIzvod="@item.GradivoIzvodID"><button type="button" class="btn btn-info">Kupi</button></a>
+                        }
+                        else
+                        {
+                            <span class="text-danger">Ni na voljo.</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.IzposojaID != null)
+                        {
+                            <span class="text-secondary">@item.Izposoja.DatumVrnitve.ToString("dd.MM.yyyy")</span>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+}

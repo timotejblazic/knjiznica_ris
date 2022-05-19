@@ -1,0 +1,30 @@
+@model web.Models.Ocena
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Podorbnosti</h1>
+
+<div>
+    <h4>Ocena</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vrednost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vrednost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mnenje)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mnenje)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.OcenaID">Uredi</a> |
+    <a asp-action="Index">Nazaj na seznam</a>
+</div>

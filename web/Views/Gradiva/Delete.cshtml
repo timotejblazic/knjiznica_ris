@@ -1,0 +1,45 @@
+@model web.Models.Gradivo
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Izbris</h1>
+
+<h3>Ste prepričani, da želite izbrisati?</h3>
+<div>
+    <h4>Gradivo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Naslov)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Naslov)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LetoIzdaje)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LetoIzdaje)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SteviloStrani)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SteviloStrani)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="GradivoID" />
+        <input type="submit" value="Izbris" class="btn btn-danger" /> |
+        <a asp-action="Index">Nazaj na seznam</a>
+    </form>
+</div>

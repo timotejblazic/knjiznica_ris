@@ -1,0 +1,59 @@
+@model web.Models.Avtor
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Podrobnosti</h1>
+
+<div>
+    <h4>Avtor</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Priimek)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Priimek)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+    </dl>
+    <hr>
+    @if (ViewData["GradivaFromAvtorID"] != null)
+    {
+        <h3>Avtorjeva gradiva</h3>
+        <table class="table">
+            <tr>
+                <th>Naslov</th>
+                <th>Leto izdaje</th>
+                <th>Število strani</th>
+                <th>Opis</th>
+            </tr>
+            @foreach (var item in (IEnumerable<Gradivo>)ViewData["GradivaFromAvtorID"])
+            {
+                <tr>
+                    <td>@item.Naslov</td>
+                    <td>@item.LetoIzdaje</td>
+                    <td>@item.SteviloStrani</td>
+                    <td>@item.Opis</td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AvtorID">Uredi</a> |
+    <a asp-action="Index">Nazaj na seznam avtorjev</a> |
+    <a asp-controller="Gradiva" asp-action="Index">Nazaj na seznam gradiv</a>
+</div>

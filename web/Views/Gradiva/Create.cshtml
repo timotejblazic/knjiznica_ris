@@ -1,0 +1,70 @@
+@model web.Models.Gradivo
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Ustvari</h1>
+
+<h4>Gradivo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Naslov" class="control-label"></label>
+                <input asp-for="Naslov" class="form-control" />
+                <span asp-validation-for="Naslov" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LetoIzdaje" class="control-label"></label>
+                <input asp-for="LetoIzdaje" class="form-control" />
+                <span asp-validation-for="LetoIzdaje" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SteviloStrani" class="control-label"></label>
+                <input asp-for="SteviloStrani" class="form-control" />
+                <span asp-validation-for="SteviloStrani" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Opis" class="control-label"></label>
+                <input asp-for="Opis" class="form-control" />
+                <span asp-validation-for="Opis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CenaGradivo" class="control-label"></label>
+                <input asp-for="CenaGradivo" class="form-control" />
+                <span asp-validation-for="CenaGradivo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kategorija" class="control-label"></label>
+                <select asp-for="KategorijaID" class="form-control" asp-items="@ViewBag.KategorijaID"></select>
+                <span asp-validation-for="KategorijaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Zanr" class="control-label"></label>
+                <select asp-for="ZanrID" class="form-control" asp-items="@ViewBag.ZanrID"></select>
+                <span asp-validation-for="ZanrID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Zalozba" class="control-label"></label>
+                <select asp-for="ZalozbaID" class="form-control" asp-items="@ViewBag.ZalozbaID"></select>
+                <span asp-validation-for="ZalozbaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Avtor" class="control-label"></label>
+                <select asp-for="AvtorID" class="form-control" asp-items="@ViewBag.AvtorID"></select>
+                <span asp-validation-for="AvtorID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ustvari" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Nazaj na seznam</a>
+</div>
+
